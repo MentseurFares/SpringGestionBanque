@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://wwww.w3.org/TR/xhtml11/.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head::taghead"></head>
+
+<body>
+	<nav th:replace="fragments/navbar::tagnavbar"></nav>
+	<div class="container mt-4">
+		<div class="card border-primary mb-3">
+			<div class="card-header bg-info">
+				<h3 th:text="${titre}">Banque :</h3>
+			</div>
+			<div class="card-body">
+				<form class="mb-3" th:action="@{/banque/add}"
+					th:object="${banqueForm}" method="post">
+					<div class="row mb-3">
+						<div class="col-4">
+							<label class="form-label">Nom</label> <input
+								class="form-control" type="text" th:field="*{nom}" />
+						</div>
+					</div>
+					<input class="btn btn-primary mt-4" type="submit" value="Ajouter" />
+				</form>
+			</div>
+		</div>
+		<a class="btn btn-secondary" th:href="@{/client/clients}">Retour</a>
+	</div>
+</body>
+
+</html>

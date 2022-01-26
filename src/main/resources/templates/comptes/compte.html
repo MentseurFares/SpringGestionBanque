@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://wwww.w3.org/TR/xhtml11/.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head::taghead"></head>
+
+<body>
+	<nav th:replace="fragments/navbar::tagnavbar"></nav>
+
+	<div class="row d-flex justify-content-center">
+		<div class="col-md-4">
+		 <!-- Partie info Compte -->
+			<div class="card border border-dark" style="margin-top : 20px">
+				<div class="card-header bg-info fw-bold fs-3">
+					<i class="bi bi-file-earmark-person"></i>Compte :
+				</div>
+				<h5 class="card-title" style="background: blue"></h5>
+				<div class="card-body ">
+					<div>
+						<label class="fw-bold">Identifiant : </label> <label
+							th:text="${compte.id}"></label>
+					</div>
+					<div>
+						<label class="fw-bold">Type : </label> <label
+							th:text="${compte.getType()}"></label>
+					</div>					
+					<div>
+						<label class="fw-bold">numero : </label> <label
+							th:text="${compte.numero}"></label>
+					</div>
+					<div>
+						<label class="fw-bold">Solde : </label> <label
+							th:text="${compte.solde}"></label>
+					</div>
+					<div>
+						<label class="fw-bold">Client : </label> <label
+							th:text="${client.getNom()} + ' ' + ${client.prenom}"></label>
+					</div>
+					
+					<div class="card-footer bg-transparent d-flex justify-content-end">
+						<a class="btn btn-info" th:href="@{/compte/update/{id}(id=${compte.id})}">Update</a>
+						<a class="btn btn-danger" th:href="@{/compte/delete/{id}(id=${compte.id})}">Delete</a>
+					</div>
+				</div>
+			</div>				
+		</div>
+		<!-- Partie info operations -->
+		<div class="col-md-6">
+			<div class="card border border-dark text-body mb-3" style="margin-top : 20px">
+				<div class="card-header bg-info fw-bold fs-3">Operations : </div>
+				<div class="card-body">
+					<table class="table table-bordered table-striped table-light">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Nom</th>
+								<th>Prénom</th>
+								<th>Date de naissance</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td th:text="${client.id}"></td>
+								<td th:text="${client.nom}"></td>
+								<td th:text="${client.prenom}"></td>
+								<td th:text="${#dates.format(client.dateNaissance, 'dd/MM/yyyy')}"></td>								
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>			
+		</div>
+	</div>
+	<footer th:replace="fragments/footer::tagfooter"></footer>
+</body>
+</html>

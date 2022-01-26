@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://wwww.w3.org/TR/xhtml11/.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head::taghead"></head>
+
+<body>
+	<nav th:replace="fragments/navbar::tagnavbar"></nav>
+
+	<div class="row d-flex justify-content-center">
+		<div class="col-md-4">
+		 <!-- Partie info Client -->
+			<div class="card border border-dark" style="margin-top : 20px">
+				<div class="card-header bg-info fw-bold fs-3">
+					<i class="bi bi-file-earmark-person"></i>Client :
+				</div>
+				<h5 class="card-title" style="background: blue"></h5>
+				<div class="card-body ">
+					<div>
+						<label class="fw-bold">Nom : </label> <label
+							th:text="${client.nom}"></label>
+					</div>
+					<div>
+						<label class="fw-bold">Prénom : </label> <label
+							th:text="${client.prenom}"></label>
+					</div>
+					<div>
+						<label class="fw-bold">Date de naissance : </label> <label
+							th:text="${#dates.format(client.dateNaissance, 'dd/MM/yyyy')}"></label>
+					</div>
+					<div>
+						<label class="fw-bold">Adresse : </label> <label
+							th:text="${client.adresse}"></label>
+					</div>
+					<div>
+						<label class="fw-bold">Banque : </label> <label
+							th:text="${client.banque.nom}"></label>
+					</div>
+					<div class="card-footer bg-transparent d-flex justify-content-end">
+						<a class="btn btn-info" th:href="@{/client/update/{id}(id=${client.id})}">Update</a>
+						<a class="btn btn-danger" th:href="@{/client/delete/{id}(id=${client.id})}">Delete</a>
+					</div>
+				</div>
+			</div>		</div>
+		<!-- Partie info operations -->
+		<div class="col-md-6">
+			<div class="card border border-dark text-body mb-3" style="margin-top : 20px">
+				<div class="card-header bg-info fw-bold fs-3">Operations</div>
+				<div class="card-body">
+					<table class="table table-bordered table-striped table-light">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Type</th>
+								<th>Numero</th>
+								<th>Solde</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="compte : ${client.comptes}">
+								<td th:text="${compte.id}"></td>
+								<td th:text="${compte.getType()}"></td>
+								<td th:text="${compte.numero}"></td>
+								<td th:text="${#numbers.formatCurrency(compte.solde)}"
+									class="align-middle"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="fragments/footer::tagfooter"></footer>
+</body>
+</html>
